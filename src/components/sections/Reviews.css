@@ -1,0 +1,267 @@
+/* =========================================================
+   REVIEWS (compact, real reviews only)
+========================================================= */
+
+.rv {
+  position: relative;
+  padding: 90px 0 100px;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--bg);
+  scroll-margin-top: 20px;
+}
+.rv::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -220px;
+  width: 1000px;
+  height: 440px;
+  translate: -50% 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(255, 43, 61, 0.14), transparent 68%);
+}
+.rv::after {
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 90, 106, 0.7), transparent);
+  box-shadow: 0 0 22px 2px rgba(255, 43, 61, 0.35);
+}
+
+.rv-inner { width: min(1100px, calc(100% - 48px)); margin: 0 auto; }
+
+.rv-head { margin: 0 auto 40px; text-align: center; }
+.rv-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 16px;
+  margin-bottom: 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.rv-eyebrow i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--red);
+  box-shadow: 0 0 10px var(--red);
+  animation: rvGlow 1.8s ease-in-out infinite;
+}
+@keyframes rvGlow {
+  0%, 100% { opacity: 0.55; scale: 0.9; }
+  50%      { opacity: 1; scale: 1.15; }
+}
+.rv-head h2 {
+  font-size: clamp(30px, 3.8vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+}
+.rv-italic { font-style: italic; }
+.rv-italic em {
+  font-family: "Instrument Serif", Georgia, serif;
+  font-weight: 400;
+  font-size: 1.14em;
+  letter-spacing: -0.02em;
+  background: linear-gradient(100deg, #ff2b3d, #ff8a96, #ff2b3d);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rvShimmer 5s linear infinite;
+}
+@keyframes rvShimmer {
+  from { background-position: 0% 0; }
+  to   { background-position: 250% 0; }
+}
+
+.rv-reveal {
+  opacity: 0;
+  translate: 0 34px;
+  filter: blur(6px);
+  transition: opacity 0.9s ease, translate 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.9s ease;
+}
+.rv-reveal.is-visible { opacity: 1; translate: 0 0; filter: blur(0); }
+
+/* ---------- layout ---------- */
+.rv-body {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.4fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+/* slanted card shape (same as the rest of the site) */
+.rv-card {
+  --cut: 26px;
+  --shape: polygon(var(--cut) 0, 100% 0, 100% calc(100% - var(--cut)), calc(100% - var(--cut)) 100%, 0 100%, 0 var(--cut));
+  padding: 2px;
+  background: linear-gradient(150deg, rgba(255, 90, 106, 0.85), rgba(255, 43, 61, 0.1) 45%, rgba(255, 43, 61, 0.55));
+  clip-path: var(--shape);
+}
+.rv-card-in {
+  height: 100%;
+  padding: 28px 26px 28px 36px;
+  clip-path: var(--shape);
+  background: linear-gradient(160deg, #160f11, #09080a 70%);
+}
+
+/* ---------- summary ---------- */
+.rv-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.rv-brand svg { width: 22px; height: 22px; fill: #00b67a; }
+
+.rv-score {
+  margin-top: 22px;
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+.rv-score small { margin-left: 6px; color: rgba(255, 255, 255, 0.45); font-size: 16px; font-weight: 600; letter-spacing: 0; }
+.rv-score-empty { color: rgba(255, 255, 255, 0.3); }
+
+.rv-stars { display: flex; gap: 4px; margin-top: 14px; }
+.rv-star {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+}
+.rv-star svg { width: 16px; height: 16px; fill: #fff; }
+.rv-star.is-on { background: #00b67a; }
+.rv-count { margin-top: 14px; color: var(--muted); font-size: 13.5px; line-height: 1.6; }
+.rv-count b { color: #00b67a; font-weight: 700; }
+
+.rv-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+.rv-btn {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 22px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ff4054, var(--red-2));
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 10px 26px rgba(255, 43, 61, 0.32), inset 0 1px rgba(255, 255, 255, 0.3);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+.rv-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(255, 43, 61, 0.5), inset 0 1px rgba(255, 255, 255, 0.3); }
+.rv-btn-ghost {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: none;
+}
+.rv-btn-ghost:hover { background: rgba(255, 255, 255, 0.1); box-shadow: none; }
+
+/* ---------- real reviews ---------- */
+.rv-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.rv-review {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+.rv-review:hover { transform: translateY(-4px); border-color: rgba(255, 43, 61, 0.4); background: rgba(255, 43, 61, 0.05); }
+.rv-review-top { display: flex; justify-content: space-between; align-items: center; }
+.rv-review .rv-stars { margin-top: 0; gap: 3px; }
+.rv-review .rv-star { width: 20px; height: 20px; }
+.rv-review .rv-star svg { width: 12px; height: 12px; }
+.rv-date { color: rgba(255, 255, 255, 0.4); font-size: 12px; }
+.rv-review h3 { margin-top: 14px; font-size: 16px; font-weight: 700; letter-spacing: -0.02em; }
+.rv-review p { margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.65; }
+.rv-by { display: flex; align-items: center; gap: 10px; margin-top: auto; padding-top: 16px; font-size: 13px; }
+.rv-avatar {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: rgba(255, 43, 61, 0.18);
+  color: #ff8a96;
+  font-size: 13px;
+  font-weight: 800;
+}
+.rv-who { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+.rv-who b { font-weight: 600; }
+.rv-who small { color: rgba(255, 255, 255, 0.4); font-size: 11px; font-weight: 600; letter-spacing: 0.5px; }
+.rv-by em { margin-left: auto; color: #00b67a; font-size: 11px; font-style: normal; font-weight: 700; }
+.rv-src {
+  margin-left: auto;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 11.5px;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+.rv-src:hover { color: #ff8a96; }
+.rv-by em + .rv-src { margin-left: 10px; }
+/* a lone last review fills the full row */
+.rv-list .rv-review:last-child:nth-child(odd) { grid-column: 1 / -1; }
+
+/* ---------- honest empty state ---------- */
+.rv-empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 30px;
+  border: 1.5px dashed rgba(255, 43, 61, 0.35);
+  border-radius: 22px;
+  background: linear-gradient(120deg, rgba(255, 43, 61, 0.07), rgba(255, 43, 61, 0.01));
+}
+.rv-ghost { display: flex; flex-direction: column; gap: 9px; max-width: 360px; margin-bottom: 22px; }
+.rv-ghost-top { display: flex; gap: 4px; margin-bottom: 4px; }
+.rv-ghost-top i { width: 20px; height: 20px; border-radius: 4px; background: rgba(255, 255, 255, 0.1); }
+.rv-ghost span {
+  display: block;
+  height: 9px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.07));
+  background-size: 200% 100%;
+  animation: rvLoad 2.4s linear infinite;
+}
+.rv-ghost-short { width: 62%; }
+@keyframes rvLoad {
+  from { background-position: 200% 0; }
+  to   { background-position: -200% 0; }
+}
+.rv-empty h3 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+.rv-empty p { margin-top: 8px; max-width: 440px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .rv-body { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .rv { padding: 70px 0 80px; }
+  .rv-list { grid-template-columns: 1fr; }
+  .rv-card-in { padding: 24px 22px 24px 30px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rv *, .rv::before { animation: none !important; transition: none !important; }
+  .rv-reveal { opacity: 1; translate: 0 0; filter: none; }
+}

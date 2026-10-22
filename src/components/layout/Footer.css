@@ -1,0 +1,171 @@
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.ft {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-top: 80px;
+  background: linear-gradient(180deg, var(--bg), #070405 60%);
+}
+.ft::before {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 90, 106, 0.85), transparent);
+  box-shadow: 0 0 24px 3px rgba(255, 43, 61, 0.45);
+}
+.ft-glow {
+  position: absolute;
+  left: 50%;
+  bottom: -260px;
+  width: 1200px;
+  height: 520px;
+  translate: -50% 0;
+  z-index: -1;
+  background: radial-gradient(ellipse at center, rgba(255, 43, 61, 0.22), transparent 68%);
+  animation: ftGlow 7s ease-in-out infinite;
+}
+@keyframes ftGlow {
+  0%, 100% { opacity: 0.7; }
+  50%      { opacity: 1; }
+}
+
+.ft-inner { width: min(1180px, calc(100% - 48px)); margin: 0 auto; }
+
+/* ---------- columns ---------- */
+.ft-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 56px;
+}
+
+.ft-logo { display: inline-flex; align-items: center; gap: 10px; font-size: 22px; font-weight: 800; letter-spacing: -0.6px; }
+.ft-logo img { width: 32px; height: 32px; object-fit: contain; filter: drop-shadow(0 0 10px rgba(255, 43, 61, 0.45)); transition: rotate 0.3s ease, scale 0.3s ease; }
+.ft-logo:hover img { rotate: -6deg; scale: 1.08; }
+.ft-logo b { color: var(--red); font-weight: 800; }
+.ft-logo small { margin-top: 6px; color: var(--muted); font-size: 12px; font-weight: 600; letter-spacing: 0; }
+
+.ft-brand p { max-width: 340px; margin-top: 18px; color: var(--muted); font-size: 14.5px; line-height: 1.75; }
+
+.ft-social { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.ft-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  height: 42px;
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+.ft-social-btn svg { width: 18px; height: 18px; }
+.ft-social-btn:hover { transform: translateY(-3px); border-color: rgba(255, 43, 61, 0.55); background: rgba(255, 43, 61, 0.12); color: #fff; }
+.ft-social-tp svg { fill: #00b67a; }
+
+.ft-col { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.ft-col h4 {
+  margin-bottom: 14px;
+  color: #ff5a6a;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+.ft-col a {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 14.5px;
+  transition: color 0.2s ease, translate 0.25s ease;
+}
+.ft-col a:hover { color: #fff; translate: 5px 0; }
+.ft-game img { width: 22px; height: 22px; object-fit: contain; border-radius: 6px; opacity: 0.85; transition: opacity 0.2s ease, scale 0.25s ease; }
+.ft-game:hover img { opacity: 1; scale: 1.12; }
+
+/* ---------- bottom bar ---------- */
+.ft-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 22px 0 26px;
+  border-top: 1px solid var(--line);
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 13px;
+}
+.ft-where { display: inline-flex; align-items: center; gap: 9px; }
+.ft-where i { width: 6px; height: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 8px var(--red); animation: ftPulse 1.8s ease-in-out infinite; }
+@keyframes ftPulse {
+  0%, 100% { opacity: 0.55; scale: 0.9; }
+  50%      { opacity: 1; scale: 1.15; }
+}
+.ft-top-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 38px;
+  padding: 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 13px;
+  font-weight: 600;
+  transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+}
+.ft-top-btn span { transition: translate 0.25s ease; }
+.ft-top-btn:hover { border-color: rgba(255, 43, 61, 0.55); background: rgba(255, 43, 61, 0.12); color: #fff; }
+.ft-top-btn:hover span { translate: 0 -3px; }
+
+/* ---------- big faded wordmark ---------- */
+.ft-mark {
+  position: relative;
+  margin-top: -10px;
+  text-align: center;
+  font-size: clamp(90px, 20vw, 300px);
+  font-weight: 900;
+  font-style: italic;
+  line-height: 0.82;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(255, 43, 61, 0.28);
+  user-select: none;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, #000 25%, transparent 92%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 25%, transparent 92%);
+  padding-bottom: 6px;
+  animation: ftMark 8s ease-in-out infinite;
+}
+@keyframes ftMark {
+  0%, 100% { -webkit-text-stroke-color: rgba(255, 43, 61, 0.2); }
+  50%      { -webkit-text-stroke-color: rgba(255, 90, 106, 0.45); }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 960px) {
+  .ft-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .ft-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .ft { padding-top: 64px; }
+  .ft-top { gap: 32px; }
+  .ft-bottom { flex-direction: column; align-items: flex-start; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ft *, .ft::before, .ft-glow { animation: none !important; transition: none !important; }
+}

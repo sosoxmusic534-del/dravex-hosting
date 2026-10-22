@@ -1,0 +1,14 @@
+/* FiveM page: only what differs from the shared page styles */
+
+.fivem .mc-plan { flex: 1 1 0; min-width: 255px; max-width: 360px; }
+.fivem .mc-rail { justify-content: center; }
+
+.fv-plan-icon { image-rendering: auto; width: 44px; height: 44px; border-radius: 12px; }
+
+.fivem .mc-plan-price { margin-bottom: 22px; }
+.fv-ask { margin: 0 !important; color: var(--accent) !important; font-size: 17px !important; font-weight: 700 !important; letter-spacing: -0.01em !important; }
+
+/* the single "get a quote" card */
+.fivem .fv-quote { flex: 0 1 460px; max-width: 460px; }
+.fv-quote-big { margin-top: 24px; color: var(--accent); font-size: 28px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.15; }
+.fv-quote-text { min-height: 0 !important; margin: 14px 0 22px !important; }
