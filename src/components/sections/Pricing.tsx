@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { MC_PLANS, MC_MAX_GB, DISCORD_URL as DISCORD, SUPPORT_EMAIL as EMAIL } from "../../data/minecraftPlans";
+import { DISCORD_URL, SUPPORT_EMAIL } from "../../config/site";
+import { MC_PLANS, MC_MAX_GB } from "../../data/minecraftPlans";
 import { RUST_PLANS } from "../../data/rustPlans";
 import { FIVEM_PLANS } from "../../data/fivemPlans";
+import { NODE_PLANS } from "../../data/nodePlans";
 import "./Pricing.css";
 
 /** Adds .is-visible once the element scrolls into view */
@@ -26,12 +28,6 @@ function useInView<T extends HTMLElement>() {
 
   return ref;
 }
-
-/* ---------------------------------------------------------
-   EDIT THESE
---------------------------------------------------------- */
-const DISCORD_URL = DISCORD;
-const SUPPORT_EMAIL = EMAIL;
 
 type Plan = {
   name: string;
@@ -115,9 +111,14 @@ const TABS: Tab[] = [
     icon: "/assets/540bef7b39-nodejs-logo.webp",
     title: "Node.js & Python hosting",
     text: "Run your Discord bot, API or app on always-on hosting. Tell us what you are building.",
-    plans: [],
-    includes: ["Always-on hosting", "Singapore location", "24/7 support"],
-    quote: true,
+    plans: NODE_PLANS.filter((p) => p.price !== null).map((p) => ({
+      name: p.name,
+      big: p.ram ? `${p.ram} RAM` : "Developer",
+      price: p.price as number,
+      note: p.vcores !== undefined ? `${p.vcores} vCore${p.vcores === 1 ? "" : "s"} · ${p.storageGb}GB NVMe · ${p.ports} port${p.ports === 1 ? "" : "s"}` : undefined,
+    })),
+    includes: ["AMD EPYC processors", "NVMe storage", "Node.js & Python support", "Singapore location", "24/7 support"],
+    quote: NODE_PLANS.every((p) => p.price === null),
   },
 ];
 

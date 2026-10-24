@@ -2,7 +2,9 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import FeatureCards from "../components/sections/FeatureCards";
-import { DISCORD_URL, SUPPORT_EMAIL, fmtLkr } from "../data/minecraftPlans";
+import PlanRail from "../components/sections/PlanRail";
+import { DISCORD_URL, SUPPORT_EMAIL } from "../config/site";
+import { fmtLkr } from "../data/minecraftPlans";
 import { RUST_PLANS, rustMinPrice } from "../data/rustPlans";
 import "./MinecraftPage.css"; // shared page styles
 import "./RustPage.css";
@@ -45,7 +47,6 @@ const IconArrow = () => <Ico><path d="M5 12h14M13 6l6 6-6 6" /></Ico>;
 
 export default function RustPage({ onOpenGames }: { onOpenGames: () => void }) {
   const plansHead = useInView<HTMLDivElement>();
-  const plansGrid = useInView<HTMLDivElement>();
   const perksHead = useInView<HTMLDivElement>();
   const ctaRef = useInView<HTMLDivElement>();
 
@@ -133,8 +134,7 @@ export default function RustPage({ onOpenGames }: { onOpenGames: () => void }) {
             <p>Pick the RAM your server needs. Budget plans are great to start with, and Prime plans give you more room.</p>
           </div>
 
-          <div className="mc-rail-wrap mc-reveal" ref={plansGrid}>
-            <div className="mc-rail">
+          <PlanRail>
               {RUST_PLANS.map((p, i) => (
                 <article
                   className={`mc-plan ${p.popular ? "is-popular" : ""}`}
@@ -169,8 +169,7 @@ export default function RustPage({ onOpenGames }: { onOpenGames: () => void }) {
                   </ul>
                 </article>
               ))}
-            </div>
-          </div>
+          </PlanRail>
 
           <p className="mc-foot">
             Orders and support run through Discord. Prefer email? Write to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.

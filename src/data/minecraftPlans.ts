@@ -3,8 +3,7 @@
    Pricing section AND the Minecraft page both update.
 --------------------------------------------------------- */
 
-export const DISCORD_URL = "https://discord.gg/4D9mUWBB78";
-export const SUPPORT_EMAIL = "support@dravexhost.xyz";
+export { DISCORD_URL, SUPPORT_EMAIL } from "../config/site";
 
 export type McPlan = {
   id: string;

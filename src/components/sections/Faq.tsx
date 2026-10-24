@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from "react";
-import { DISCORD_URL } from "../../data/minecraftPlans";
+import { DISCORD_URL } from "../../config/site";
 import "./Faq.css";
 
 /** Adds .is-visible once the element scrolls into view */
@@ -28,7 +28,7 @@ function useInView<T extends HTMLElement>() {
 /* ---------- icons (all from /public/assets) ---------- */
 const A = "/assets/";
 const IMG = {
-  minecraft: { name: "Minecraft", src: A + "85b35026a3-minecraft-key-art.webp", cover: true },
+  minecraft: { name: "Minecraft", src: "/games/minecraft.png", cover: true },
   rust: { name: "Rust", src: A + "70f8c6a7bb-rust.webp" },
   fivem: { name: "FiveM", src: A + "76d3233bbb-fivem.webp" },
   node: { name: "Node.js", src: A + "540bef7b39-nodejs-logo.webp" },

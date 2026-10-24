@@ -3,6 +3,10 @@
  */
 export const DISCORD_URL = "https://discord.gg/6Nrwkh7pAc";
 export const STATUS_URL = "https://status.dravexhost.xyz";
+export const SUPPORT_EMAIL = "support@dravexhost.xyz";
+export const TRUSTPILOT_PAGE = "https://www.trustpilot.com/review/dravexhost.xyz";
+export const TRUSTPILOT_WRITE = "https://www.trustpilot.com/evaluate/dravexhost.xyz";
+export const TRUSTPILOT_URL = TRUSTPILOT_PAGE;
 
 /**
  * Where the "Deploy now" buttons send people.

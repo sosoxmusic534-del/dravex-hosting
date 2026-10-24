@@ -1,15 +1,11 @@
+import { DISCORD_URL, TRUSTPILOT_URL } from "../../config/site";
 import "./Footer.css";
-
-/* ---------------------------------------------------------
-   EDIT THESE
---------------------------------------------------------- */
-const DISCORD_URL = "#"; // <- your Discord invite link
-const TRUSTPILOT_URL = "https://www.trustpilot.com/review/dravexhost.xyz";
 
 const GAME_LINKS = [
   { label: "Minecraft", href: "/games/minecraft", icon: "/games/minecraft.png" },
-  { label: "Rust", href: "/games/rust", icon: "/assets/70f8c6a7bb-rust.webp" },
-  { label: "FiveM", href: "/games/fivem", icon: "/assets/76d3233bbb-fivem.webp" },
+  { label: "Hytale", href: "/games/hytale", icon: "/games/hytale.jpg" },
+  { label: "Rust", href: "/games/rust", icon: "/games/game-rust.jpg" },
+  { label: "FiveM", href: "/games/fivem", icon: "/games/FiveM-Logo.png" },
   { label: "Node.js & Bots", href: "/games/nodejs", icon: "/assets/540bef7b39-nodejs-logo.webp" },
 ];
 
@@ -92,7 +88,19 @@ export default function Footer() {
           <p className="ft-where">
             <i /> Hosted in Singapore · Made in Sri Lanka
           </p>
-          <button type="button" className="ft-top-btn" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} aria-label="Back to top">
+          <button
+            type="button"
+            className="ft-top-btn"
+            onClick={() => {
+              const lenis = (window as any).lenis;
+              if (lenis && typeof lenis.scrollTo === "function") {
+                lenis.scrollTo(0, { duration: 1.2 });
+                return;
+              }
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            aria-label="Back to top"
+          >
             Back to top <span>↑</span>
           </button>
         </div>

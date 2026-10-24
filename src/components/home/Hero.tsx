@@ -47,7 +47,7 @@ type Pos = "tl" | "bl" | "tr" | "br";
   Put your game background images here:
     public/games/bg/minecraft.jpg
     public/games/bg/rust.jpg
-    public/games/bg/nodejs.jpg
+    public/games/bg/hytale.jpg
     public/games/bg/fivem.jpg
 */
 const GAMES: Record<Pos, Game> = {
@@ -72,8 +72,8 @@ const GAMES: Record<Pos, Game> = {
     tag: "Adventure servers",
     icon: "/games/hytale.jpg",
     bg: "/games/bg/hytale.jpg",
-    c1: "#3d8bff",
-    c2: "#1b0f4a",
+    c1: "#3d8bff", // sky blue
+    c2: "#1b0f4a", // deep purple
   },
   br: {
     name: "FiveM",
@@ -248,7 +248,7 @@ export default function Hero({ onOpenGames }: { onOpenGames?: () => void }) {
           <button type="button" className="hero-btn hero-btn-primary" onClick={onOpenGames}>
             Choose a game <span>→</span>
           </button>
-          <a href="#pricing" className="hero-btn hero-btn-ghost">View pricing</a>
+          <a href="#features" className="hero-btn hero-btn-ghost">Why DraveX</a>
         </div>
 
         <ul className="hero-stats rise d5">

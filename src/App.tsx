@@ -1,7 +1,8 @@
 import { useEffect } from "react";
+import { usePath } from "./lib/nav.tsx";
+import { useSeo } from "./lib/seo";
 import Hero from "./components/home/Hero";
 import Games from "./components/sections/Games";
-import Pricing from "./components/sections/Pricing";
 import Features from "./components/sections/Features";
 import Locations from "./components/sections/Locations";
 import Reviews from "./components/sections/Reviews";
@@ -10,11 +11,14 @@ import Footer from "./components/layout/Footer";
 import MinecraftPage from "./pages/MinecraftPage";
 import RustPage from "./pages/RustPage";
 import FiveMPage from "./pages/FiveMPage";
+import NodePage from "./pages/NodePage";
+import HytalePage from "./pages/HytalePage";
 import AboutPage from "./pages/AboutPage";
 import LegalPage from "./pages/LegalPage";
 
 export default function App() {
-  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  const path = usePath();
+  useSeo(path);
   const onHome = path === "/";
 
   // "Choose a game" / navbar "Games": scroll on the home page, otherwise go home first
@@ -29,11 +33,13 @@ export default function App() {
     if (!id) return;
     const t = setTimeout(() => document.getElementById(id)?.scrollIntoView(), 60);
     return () => clearTimeout(t);
-  }, []);
+  }, [path]);
 
   if (path === "/games/minecraft") return <MinecraftPage onOpenGames={openGames} />;
   if (path === "/games/rust") return <RustPage onOpenGames={openGames} />;
   if (path === "/games/fivem") return <FiveMPage onOpenGames={openGames} />;
+  if (path === "/games/hytale") return <HytalePage onOpenGames={openGames} />;
+  if (path === "/games/nodejs") return <NodePage onOpenGames={openGames} />;
   if (path === "/about") return <AboutPage onOpenGames={openGames} />;
   if (["/terms", "/refund-policy", "/privacy"].includes(path)) return <LegalPage path={path} onOpenGames={openGames} />;
 
@@ -41,7 +47,6 @@ export default function App() {
     <div className="app">
       <Hero onOpenGames={openGames} />
       <Games />
-      <Pricing />
       <Features />
       <Locations />
       <Reviews />

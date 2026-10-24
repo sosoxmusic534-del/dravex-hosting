@@ -1,0 +1,43 @@
+/* Hytale page: only what differs from the shared page styles */
+
+.hytale .mc-plan { flex: 0 0 292px; }
+
+.ht-hero-logo { width: min(40%, 230px) !important; height: auto !important; object-fit: contain; filter: drop-shadow(0 0 36px rgba(61, 139, 255, 0.35)) drop-shadow(0 24px 40px rgba(0, 0, 0, 0.6)) !important; }
+.ht-plan-icon { width: 44px; height: 44px; padding: 5px; border-radius: 12px; object-fit: contain; background: rgba(255, 255, 255, 0.05); }
+
+.hytale .mc-plan-price { margin-bottom: 22px; }
+.ht-ask { margin: 0 !important; color: var(--accent) !important; font-size: 17px !important; font-weight: 700 !important; letter-spacing: -0.01em !important; }
+
+/* the single "get a quote" card */
+.hytale .ht-quote { flex: 0 1 460px; max-width: 460px; }
+.ht-quote-big { margin-top: 24px; color: var(--accent); font-size: 28px; font-weight: 800; letter-spacing: -0.04em; line-height: 1.15; }
+.ht-quote-text { min-height: 0 !important; margin: 14px 0 22px !important; }
+
+/* ---------- use cases ---------- */
+.ht-uses { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.ht-use {
+  padding: 26px 22px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: linear-gradient(160deg, #140e10, #09080a 75%);
+  transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+}
+.ht-use:hover { transform: translateY(-6px); border-color: rgba(61, 139, 255, 0.5); box-shadow: 0 22px 46px rgba(61, 139, 255, 0.12); }
+.ht-use-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border: 1px solid rgba(61, 139, 255, 0.4);
+  border-radius: 13px;
+  background: rgba(61, 139, 255, 0.1);
+  color: #3d8bff;
+  transition: background 0.3s ease, color 0.3s ease, rotate 0.3s ease;
+}
+.ht-use-icon svg { width: 22px; height: 22px; }
+.ht-use:hover .ht-use-icon { background: #3d8bff; color: #fff; rotate: -6deg; }
+.ht-use h3 { margin-top: 20px; font-size: 18px; font-weight: 800; letter-spacing: -0.03em; }
+.ht-use p { margin-top: 8px; color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+@media (max-width: 1000px) { .ht-uses { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 560px) { .ht-uses { grid-template-columns: 1fr; } }

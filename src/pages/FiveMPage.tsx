@@ -2,7 +2,9 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import FeatureCards from "../components/sections/FeatureCards";
-import { DISCORD_URL, SUPPORT_EMAIL, fmtLkr } from "../data/minecraftPlans";
+import PlanRail from "../components/sections/PlanRail";
+import { DISCORD_URL, SUPPORT_EMAIL } from "../config/site";
+import { fmtLkr } from "../data/minecraftPlans";
 import { FIVEM_PLANS, FIVEM_ACCENT, fivemMinPrice } from "../data/fivemPlans";
 import "./MinecraftPage.css"; // shared page styles
 import "./FiveMPage.css";
@@ -46,7 +48,6 @@ const IconArrow = () => <Ico><path d="M5 12h14M13 6l6 6-6 6" /></Ico>;
 
 export default function FiveMPage({ onOpenGames }: { onOpenGames: () => void }) {
   const plansHead = useInView<HTMLDivElement>();
-  const plansGrid = useInView<HTMLDivElement>();
   const perksHead = useInView<HTMLDivElement>();
   const ctaRef = useInView<HTMLDivElement>();
 
@@ -140,8 +141,7 @@ export default function FiveMPage({ onOpenGames }: { onOpenGames: () => void }) 
             </p>
           </div>
 
-          <div className="mc-rail-wrap mc-reveal" ref={plansGrid}>
-            <div className="mc-rail">
+          <PlanRail>
               {hasPlans ? (
                 FIVEM_PLANS.map((p, i) => (
                   <article
@@ -197,8 +197,7 @@ export default function FiveMPage({ onOpenGames }: { onOpenGames: () => void }) 
                   </ul>
                 </article>
               )}
-            </div>
-          </div>
+          </PlanRail>
 
           <p className="mc-foot">
             Orders and support run through Discord. Prefer email? Write to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.

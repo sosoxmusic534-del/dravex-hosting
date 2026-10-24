@@ -318,21 +318,6 @@
 .pr-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 34px rgba(255, 43, 61, 0.5), inset 0 1px rgba(255, 255, 255, 0.3); }
 .pr-btn span { transition: translate 0.25s ease; }
 .pr-btn:hover span { translate: 4px 0; }
-.pr-btn::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -60%;
-  width: 40%;
-  height: 100%;
-  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-  transform: skewX(-20deg);
-  animation: prShine 3.6s ease-in-out infinite;
-}
-@keyframes prShine {
-  0%, 55% { left: -60%; }
-  100%    { left: 130%; }
-}
 
 .pr-quote { min-height: 300px; justify-content: flex-start; }
 .pr-quote .pr-btn { margin-top: auto; }

@@ -1,4 +1,5 @@
 import { useEffect, useRef, type CSSProperties, type MouseEvent } from "react";
+import { TRUSTPILOT_PAGE, TRUSTPILOT_WRITE } from "../../config/site";
 import "./Reviews.css";
 
 /** Adds .is-visible once the element scrolls into view */
@@ -23,12 +24,6 @@ function useInView<T extends HTMLElement>() {
 
   return ref;
 }
-
-/* ---------------------------------------------------------
-   EDIT THIS: your Trustpilot links
---------------------------------------------------------- */
-const TRUSTPILOT_PAGE = "https://www.trustpilot.com/review/dravexhost.xyz";
-const TRUSTPILOT_WRITE = "https://www.trustpilot.com/evaluate/dravexhost.xyz";
 
 type Review = {
   name: string;

@@ -86,8 +86,8 @@ const GAMES: Game[] = [
   {
     name: "Hytale",
     tag: "Adventure servers",
-    status: "soon",
-    href: "#",
+    status: "available",
+    href: "/games/hytale",
     layout: "figure",
     art: ["ae3bf84a42-hytale.webp"],
     c1: "#3d8bff",

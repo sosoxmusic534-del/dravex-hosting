@@ -2,7 +2,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import Reviews from "../components/sections/Reviews";
-import { DISCORD_URL, SUPPORT_EMAIL } from "../data/minecraftPlans";
+import { DISCORD_URL, SUPPORT_EMAIL } from "../config/site";
 import "./MinecraftPage.css"; // shared page styles
 import "./AboutPage.css";
 
@@ -71,7 +71,7 @@ const HOSTS = [
   { name: "Minecraft", text: "Java servers with mods and plugins", href: "/games/minecraft", icon: "/games/minecraft.png" },
   { name: "Rust", text: "Budget and Prime servers", href: "/games/rust", icon: "/assets/70f8c6a7bb-rust.webp" },
   { name: "FiveM", text: "GTA roleplay servers", href: "/games/fivem", icon: "/assets/76d3233bbb-fivem.webp" },
-  { name: "Node.js & Python", text: "Bots, APIs and apps", href: "/#pricing", icon: "/assets/540bef7b39-nodejs-logo.webp" },
+  { name: "Node.js & Python", text: "Bots, APIs and apps", href: "/games/nodejs", icon: "/assets/540bef7b39-nodejs-logo.webp" },
 ];
 
 export default function AboutPage({ onOpenGames }: { onOpenGames: () => void }) {
@@ -129,7 +129,7 @@ export default function AboutPage({ onOpenGames }: { onOpenGames: () => void }) 
             </p>
 
             <div className="mc-actions rise d4">
-              <a href="/#pricing" className="mc-btn">See our plans <span>→</span></a>
+              <a href="/#games" className="mc-btn">Choose a game <span>→</span></a>
               <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className="mc-btn mc-btn-ghost">Talk to us on Discord</a>
             </div>
           </div>
@@ -269,7 +269,7 @@ export default function AboutPage({ onOpenGames }: { onOpenGames: () => void }) 
               </p>
               <div className="mc-actions">
                 <a href={DISCORD_URL} target="_blank" rel="noopener noreferrer" className="mc-btn">Join our Discord <span>→</span></a>
-                <a href="/#pricing" className="mc-btn mc-btn-ghost">See plans</a>
+                <a href="/#games" className="mc-btn mc-btn-ghost">Our games</a>
               </div>
             </div>
           </div>

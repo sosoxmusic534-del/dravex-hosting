@@ -1,7 +1,6 @@
 /* FiveM page: only what differs from the shared page styles */
 
-.fivem .mc-plan { flex: 1 1 0; min-width: 255px; max-width: 360px; }
-.fivem .mc-rail { justify-content: center; }
+.fivem .mc-plan { flex: 0 0 292px; }
 
 .fv-plan-icon { image-rendering: auto; width: 44px; height: 44px; border-radius: 12px; }
 

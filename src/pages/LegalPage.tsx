@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
-import { DISCORD_URL, SUPPORT_EMAIL } from "../data/minecraftPlans";
+import { DISCORD_URL, SUPPORT_EMAIL } from "../config/site";
 import "./LegalPage.css";
 
 type Doc = {

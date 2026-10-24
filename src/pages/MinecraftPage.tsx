@@ -2,7 +2,8 @@ import { useEffect, useRef, useState, type ReactNode } from "react";
 import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 import FeatureCards from "../components/sections/FeatureCards";
-import { MC_PLANS, DISCORD_URL, SUPPORT_EMAIL, fmtLkr } from "../data/minecraftPlans";
+import { DISCORD_URL, SUPPORT_EMAIL } from "../config/site";
+import { MC_PLANS, fmtLkr } from "../data/minecraftPlans";
 import "./MinecraftPage.css";
 
 /** Adds .is-visible once the element scrolls into view */
@@ -117,7 +118,23 @@ export default function MinecraftPage({ onOpenGames }: { onOpenGames: () => void
     setCanPrev(el.scrollLeft > 8);
     setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
   };
-  const slide = (dir: 1 | -1) => railRef.current?.scrollBy({ left: dir * 330, behavior: "smooth" });
+  const slide = (dir: 1 | -1) => {
+    const el = railRef.current;
+    if (!el) return;
+    const start = el.scrollLeft;
+    const target = start + dir * 330;
+    const ms = 900;
+    const t0 = performance.now();
+    const ease = (t: number) => 1 - Math.pow(1 - t, 4);
+
+    const frame = (now: number) => {
+      const p = Math.min(1, (now - t0) / ms);
+      el.scrollLeft = start + (target - start) * ease(p);
+      if (p < 1) requestAnimationFrame(frame);
+    };
+
+    requestAnimationFrame(frame);
+  };
 
   useEffect(() => {
     updateRail();

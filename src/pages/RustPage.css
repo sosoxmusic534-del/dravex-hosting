@@ -1,7 +1,7 @@
 /* Rust page: only what differs from the shared Minecraft page styles */
 
 /* four plans fit in one row */
-.rust .mc-plan { flex: 1 1 0; min-width: 255px; }
+.rust .mc-plan { flex: 0 0 292px; }
 
 .rust-plan-icon { image-rendering: auto; width: 46px; height: 46px; border-radius: 10px; }
 
