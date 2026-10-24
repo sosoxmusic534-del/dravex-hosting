@@ -10,6 +10,7 @@ import Footer from "./components/layout/Footer";
 import MinecraftPage from "./pages/MinecraftPage";
 import RustPage from "./pages/RustPage";
 import FiveMPage from "./pages/FiveMPage";
+import AboutPage from "./pages/AboutPage";
 
 export default function App() {
   const path = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -32,6 +33,7 @@ export default function App() {
   if (path === "/games/minecraft") return <MinecraftPage onOpenGames={openGames} />;
   if (path === "/games/rust") return <RustPage onOpenGames={openGames} />;
   if (path === "/games/fivem") return <FiveMPage onOpenGames={openGames} />;
+  if (path === "/about") return <AboutPage onOpenGames={openGames} />;
 
   return (
     <div className="app">
