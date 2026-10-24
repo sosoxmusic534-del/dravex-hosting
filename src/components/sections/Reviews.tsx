@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, type CSSProperties, type MouseEvent } from "react";
 import "./Reviews.css";
 
 /** Adds .is-visible once the element scrolls into view */
@@ -26,7 +26,6 @@ function useInView<T extends HTMLElement>() {
 
 /* ---------------------------------------------------------
    EDIT THIS: your Trustpilot links
-   (these work once your business page exists on Trustpilot)
 --------------------------------------------------------- */
 const TRUSTPILOT_PAGE = "https://www.trustpilot.com/review/dravexhost.xyz";
 const TRUSTPILOT_WRITE = "https://www.trustpilot.com/evaluate/dravexhost.xyz";
@@ -96,9 +95,17 @@ const Stars = ({ value }: { value: number }) => (
   </div>
 );
 
+/** Moves the red spotlight under the cursor */
+const spot = (e: MouseEvent<HTMLElement>) => {
+  const r = e.currentTarget.getBoundingClientRect();
+  e.currentTarget.style.setProperty("--x", `${e.clientX - r.left}px`);
+  e.currentTarget.style.setProperty("--y", `${e.clientY - r.top}px`);
+};
+
 export default function Reviews() {
   const headRef = useInView<HTMLDivElement>();
-  const bodyRef = useInView<HTMLDivElement>();
+  const sumRef = useInView<HTMLDivElement>();
+  const listRef = useInView<HTMLDivElement>();
   const hasReviews = REVIEWS.length > 0;
 
   return (
@@ -110,32 +117,39 @@ export default function Reviews() {
             What customers
             <span className="rv-italic"> <em>really</em> say</span>
           </h2>
+          <p>Only real reviews from real customers, straight from Trustpilot.</p>
         </div>
 
-        <div className="rv-body rv-reveal" ref={bodyRef}>
-          {/* ---------- Trustpilot summary ---------- */}
-          <div className="rv-card rv-summary">
-            <div className="rv-card-in">
-              <div className="rv-brand">
+        {/* ---------- Trustpilot summary bar ---------- */}
+        <div className="rv-sumwrap rv-reveal" ref={sumRef}>
+          <div className="rv-sum">
+            <div className="rv-sum-in">
+              <div className="rv-sum-brand">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.6 7.1L12 17.7 5.8 21.3l1.6-7.1L2 9.5l7.1-.6L12 2Z" /></svg>
                 Trustpilot
               </div>
 
-              {RATING ? (
-                <>
-                  <div className="rv-score">{RATING.score.toFixed(1)}<small>/ 5</small></div>
-                  <Stars value={RATING.score} />
-                  <p className="rv-count">
-                    <b>{RATING.label}</b> · based on {RATING.count} review{RATING.count === 1 ? "" : "s"}
-                  </p>
-                </>
-              ) : (
-                <>
-                  <div className="rv-score rv-score-empty">—</div>
-                  <Stars value={0} />
-                  <p className="rv-count">No reviews yet. Be one of the first.</p>
-                </>
-              )}
+              <div className="rv-sum-rate">
+                {RATING ? (
+                  <>
+                    <div className="rv-score">{RATING.score.toFixed(1)}<small>/ 5</small></div>
+                    <div className="rv-sum-meta">
+                      <Stars value={RATING.score} />
+                      <p className="rv-count">
+                        <b>{RATING.label}</b> · based on {RATING.count} review{RATING.count === 1 ? "" : "s"}
+                      </p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="rv-score rv-score-empty">—</div>
+                    <div className="rv-sum-meta">
+                      <Stars value={0} />
+                      <p className="rv-count">No reviews yet. Be one of the first.</p>
+                    </div>
+                  </>
+                )}
+              </div>
 
               <div className="rv-actions">
                 <a href={TRUSTPILOT_WRITE} target="_blank" rel="noopener noreferrer" className="rv-btn">
@@ -143,53 +157,61 @@ export default function Reviews() {
                 </a>
                 {(RATING || hasReviews) && (
                   <a href={TRUSTPILOT_PAGE} target="_blank" rel="noopener noreferrer" className="rv-btn rv-btn-ghost">
-                    View all on Trustpilot
+                    View all
                   </a>
                 )}
               </div>
             </div>
           </div>
+        </div>
 
-          {/* ---------- real reviews, or an honest empty state ---------- */}
-          {hasReviews ? (
-            <div className="rv-list">
-              {REVIEWS.slice(0, 4).map((r) => (
-                <article className="rv-review" key={r.name + r.date}>
-                  <div className="rv-review-top">
-                    <Stars value={r.stars} />
-                    <span className="rv-date">{r.date}</span>
-                  </div>
-                  <h3>{r.title}</h3>
-                  {r.text && <p>{r.text}</p>}
-                  <div className="rv-by">
-                    <span className="rv-avatar">{r.name.charAt(0).toUpperCase()}</span>
-                    <span className="rv-who">
-                      <b>{r.name}</b>
-                      {r.country && <small>{r.country}</small>}
-                    </span>
-                    {r.verified && <em>Verified</em>}
-                    {r.url && (
-                      <a href={r.url} target="_blank" rel="noopener noreferrer" className="rv-src">
-                        On Trustpilot ↗
-                      </a>
-                    )}
+        {/* ---------- real reviews, or an honest empty state ---------- */}
+        {hasReviews ? (
+          <div className="rv-list" ref={listRef}>
+            {REVIEWS.slice(0, 6).map((r, i) => (
+              <div className="rv-wrap" key={r.name + r.date} style={{ "--i": i } as CSSProperties}>
+                <article className="rv-review" onMouseMove={spot}>
+                  <div className="rv-review-in">
+                    <span className="rv-quote" aria-hidden="true">“</span>
+
+                    <div className="rv-review-top">
+                      <Stars value={r.stars} />
+                      <span className="rv-date">{r.date}</span>
+                    </div>
+
+                    <h3 className={r.text ? "" : "is-solo"}>{r.title}</h3>
+                    {r.text && <p>{r.text}</p>}
+
+                    <div className="rv-by">
+                      <span className="rv-avatar">{r.name.charAt(0).toUpperCase()}</span>
+                      <span className="rv-who">
+                        <b>{r.name}</b>
+                        {r.country && <small>{r.country}</small>}
+                      </span>
+                      {r.verified && <em>Verified</em>}
+                      {r.url && (
+                        <a href={r.url} target="_blank" rel="noopener noreferrer" className="rv-src">
+                          Trustpilot ↗
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </article>
-              ))}
-            </div>
-          ) : (
-            <div className="rv-empty">
-              <div className="rv-ghost">
-                <div className="rv-ghost-top"><i /><i /><i /><i /><i /></div>
-                <span /><span /><span className="rv-ghost-short" />
               </div>
-              <h3>Your review could be here</h3>
-              <p>
-                We only show real reviews from real customers, never made-up ones. Used DraveX Host? Tell others what it was like.
-              </p>
+            ))}
+          </div>
+        ) : (
+          <div className="rv-empty">
+            <div className="rv-ghost">
+              <div className="rv-ghost-top"><i /><i /><i /><i /><i /></div>
+              <span /><span /><span className="rv-ghost-short" />
             </div>
-          )}
-        </div>
+            <h3>Your review could be here</h3>
+            <p>
+              We only show real reviews from real customers, never made-up ones. Used DraveX Host? Tell others what it was like.
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );
